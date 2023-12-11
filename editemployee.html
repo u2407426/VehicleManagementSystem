@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-sm-3" style="background-color:lavender;">
+
+        <a href="{{ url_for('home') }}" class="navbar-item">Home</a>
+    </div>
+    <div class="col-sm-3" style="background-color:lavenderblush;">
+
+        <a href="{{ url_for('employee') }}" class="navbar-item">Employee</a>
+
+    </div>
+</div>
+
+
+<div>
+    {% for row in rows %}
+        <form action="{{ url_for('editemployeerecord') }}" method="POST">
+            <input type="hidden" name="id" value="{{ row[0] }}">
+            <div class="form-group col-sm-6">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control"  id="name" name="name"  value="{{ row[1] }}">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ row[2] }}">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="contactno">Contact Number:</label>
+                <input type="number" class="form-control" id="contactno" name="contactno" value="{{ row[3] }}">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="salary">Salary:</label>
+                <input type="text" class="form-control" id="salary" name="salary" value="{{ row[5] }}">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="joiningDate">Joining Date:</label>
+                <input type="text" class="form-control" id="joiningDate" name="joiningDate" data-provide="datepicker" value="{{ row[4] }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    {% endfor %}
+</div>
+<script>
+    $(document).ready(function () {
+        $('#joiningDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true
+        });
+    });
+</script>
+
+
+</body>
+</html>
